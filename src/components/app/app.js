@@ -17,7 +17,7 @@ class App extends Component {
   toggleRandomPlanet = () => {
     this.setState((prev) => {
       return {
-        showRandomPlanet: !ProgressEvent.showRandomPlanet
+        showRandomPlanet: !prev.showRandomPlanet
       }
     })
   }
