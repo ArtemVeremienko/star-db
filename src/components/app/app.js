@@ -32,7 +32,7 @@ class App extends Component {
     const planet = this.state.showRandomPlanet && <RandomPlanet />;
 
     return (
-      <div>
+      <div className="container">
         <Header />
         {planet}
 
