@@ -7,7 +7,7 @@ import ErrorButton from '../error-button';
 import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service'
 import ErrorBoundry from '../error-boundry'
-import ItemDetails from '../item-details'
+import ItemDetails, { Record } from '../item-details'
 import Row from '../row'
 
 import './app.css'
@@ -36,14 +36,23 @@ class App extends Component {
       <ItemDetails
         itemId={11}
         getData={getPerson}
-        getImageUrl={getPersonImage} />
+        getImageUrl={getPersonImage}
+      >
+        <Record field="gender" label="Gender" />
+        <Record field="eyeColor" label="Eyr Color" />
+      </ItemDetails>
     )
 
     const starshipDetails = (
       <ItemDetails
         itemId={5}
         getData={getStarship}
-        getImageUrl={getStarshipImage} />
+        getImageUrl={getStarshipImage}
+      >
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
     )
     return (
       <ErrorBoundry>
