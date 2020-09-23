@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 
-import Header from '../header'
-import RandomPlanet from '../random-planet'
-import PeoplePage from '../people-page'
-import ErrorButton from '../error-button';
-import ItemList from '../item-list';
-import SwapiService from '../../services/swapi-service'
-import ErrorBoundry from '../error-boundry'
-import ItemDetails, { Record } from '../item-details'
+import Header from '../header';
+import RandomPlanet from '../random-planet';
+import ErrorBoundry from '../error-boundry';
+
 import Row from '../row'
+import ItemDetails, { Record } from '../item-details'
+import SwapiService from '../../services/swapi-service'
+import ItemList from '../item-list';
 
 import './app.css'
 
-class App extends Component {
+export default class App extends Component {
 
   swapiService = new SwapiService();
 
@@ -29,8 +28,15 @@ class App extends Component {
   }
 
   render() {
+    const planet = this.state.showRandomPlanet && <RandomPlanet />
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+    const {
+      getPerson,
+      getStarship,
+      getPersonImage,
+      getStarshipImage,
+      getAllPeople,
+      getAllPlanets } = this.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -39,7 +45,7 @@ class App extends Component {
         getImageUrl={getPersonImage}
       >
         <Record field="gender" label="Gender" />
-        <Record field="eyeColor" label="Eyr Color" />
+        <Record field="eyeColor" label="Eye Color" />
       </ItemDetails>
     )
 
@@ -59,14 +65,20 @@ class App extends Component {
         <div className="container stardb-app">
           <Header />
 
-          <Row
-            left={personDetails}
-            right={starshipDetails} />
+          <ItemList
+            getData={getAllPeople}
+            onItemSelected={() => { }}>
+            {({ name }) => <span>{name}</span>}
+          </ItemList>
+
+          <ItemList
+            getData={getAllPlanets}
+            onItemSelected={() => { }}>
+            {({ name }) => <span>{name}</span>}
+          </ItemList>
         </div>
       </ErrorBoundry>
     )
   }
 
 }
-
-export default App;
